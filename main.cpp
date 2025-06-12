@@ -3,8 +3,7 @@
 #include <mod/config.h>
 #include <dlfcn.h>
 
-#include <inc/CVector1.h>
-#include <inc/CVector1.cpp>
+#include <inc/CVector1>
 #include <inc/CTimer1.h>
 
 MYMODCFG(net.fixjiggle.jayz, JayMOD, 1.0, jayzxy)
