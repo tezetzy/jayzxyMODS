@@ -1,4 +1,4 @@
-
+#include <CVector1.h>
 const float DotProduct(const CVector& first, const CVector& second)
 {
     return first.x * second.x + first.y * second.y + first.z * second.z;
