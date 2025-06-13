@@ -1,7 +1,7 @@
 include <mod/amlmod.h>
 
 MYMOD(net.jayzxy.gtasa.mirafix, GTA:SA Crosshair Fix, 1.0, Jayzxy)
-NEEDGAME(com.rockstargames.gtasa)
+NEEDGAME(ro.alyn_sampmobile.game)
 
 /* Saves */
 static uintptr_t pGTASA = 0;
@@ -20,6 +20,9 @@ DECL_HOOK(void, DrawCrosshair)
 
 extern "C" void OnModLoad()
 {
+    cfg->Bind("Author", "", "About")->SetString("JayzxyLGC"); cfg->ClearLast()
+    cfg->Bind("IdeasFrom", "", "About")->SetString("JuniorDjjr, XMDS, RusJJ"); cfg->ClearLast()
+    cfg->Bind("Discord", "", "About")->SetString("https://discord.gg/LOGIKA"); cfg->ClearLast()
     pGTASA = aml->GetLib("libGTASA.so");
 
     aml->Unprot(pGTASA + 0x952CB0, 8);
