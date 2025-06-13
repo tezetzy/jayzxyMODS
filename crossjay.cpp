@@ -20,9 +20,6 @@ DECL_HOOK(void, DrawCrosshair)
 
 extern "C" void OnModLoad()
 {
-    cfg->Bind("Author", "", "About")->SetString("JayzxyLGC"); cfg->ClearLast()
-    cfg->Bind("IdeasFrom", "", "About")->SetString("JuniorDjjr, XMDS, RusJJ"); cfg->ClearLast()
-    cfg->Bind("Discord", "", "About")->SetString("https://discord.gg/LOGIKA"); cfg->ClearLast()
     pGTASA = aml->GetLib("libGTASA.so");
 
     aml->Unprot(pGTASA + 0x952CB0, 8);
