@@ -30,17 +30,6 @@
     #define EXPORT
 #endif
 
-#define MYMOD(_guid, _name, _version, _author)                          \
-    static ModInfo modinfoLocal(#_guid, #_name, #_version, #_author);   \
-    ModInfo* modinfo = &modinfoLocal;                                   \
-    extern "C" ModInfo* __GetModInfo() { return modinfo; }              \
-    IAML* aml = (IAML*)GetInterface("AMLInterface");
-
-#define MYMODCFG(_guid, _name, _version, _author)                       \
-    MYMOD(_guid, _name, _version, _author);                             \
-    static Config cfgLocal(#_guid);                                     \
-    Config* cfg = &cfgLocal;
-
 #define NEEDGAME(_pkg_name)                                             \
     extern "C" const char* __INeedASpecificGame() {return #_pkg_name;}
 
