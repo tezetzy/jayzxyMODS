@@ -38,5 +38,4 @@ jobs:
     - name: Upload the mod!
       uses: actions/upload-artifact@v4
       with:
-        name: libjayzpatch.so
-        path: obj/local/armeabi-v7a/libjayzpatch.so
+        name: libjayzxymods
