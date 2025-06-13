@@ -7,7 +7,7 @@ ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
 else
 	LOCAL_MODULE := AbtFixes64
 endif
-LOCAL_SRC_FILES := libjaypatch.cpp mod/logger.cpp mod/config.cpp
+LOCAL_SRC_FILES := libjaypatch.cpp
 LOCAL_CFLAGS += -O2 -mfloat-abi=softfp -DNDEBUG -std=c++17
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/patches
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
