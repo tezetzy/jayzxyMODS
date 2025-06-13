@@ -8,11 +8,28 @@ uintptr_t pGTASA;
 void* hGTASA;
 float *ms_fTimeStep;
 CPlayerInfo* WorldPlayers;
+
+enum RwRenderState
+{
+    rwRENDERSTATENARENDERSTATE = 0,           // Tidak valid
+    rwRENDERSTATEZTESTENABLE = 4,             // Aktifkan depth test
+    rwRENDERSTATEZWRITEENABLE = 7,            // Menulis ke depth buffer
+    rwRENDERSTATEVERTEXALPHAENABLE = 22,      // Enable transparansi berdasarkan alpha
+    rwRENDERSTATEFOGENABLE = 26,              // Aktifkan fog
+    rwRENDERSTATEFOGCOLOR = 27,               // Atur warna fog
+    rwRENDERSTATETEXTURERASTER = 29,          // Atur tekstur yang aktif
+    rwRENDERSTATECULLMODE = 20,               // Cull back/front/none
+    rwRENDERSTATESTENCILENABLE = 52,          // Aktifkan stencil buffer
+    rwRENDERSTATEALPHATESTFUNCTIONREF = 38,   // Alpha test ref value
+    rwRENDERSTATEALPHATESTFUNCTION = 37       // Alpha test function (misalnya GREATER, LESS)
+};
+
 struct CVector2D
 {
     float x;
     float y;
 };
+
 void Redirect(uintptr_t addr, uintptr_t to)
 {
     if(!addr) return;
@@ -70,7 +87,6 @@ DECL_HOOK(ScriptHandle, GenerateNewPickup, float x, float y, float z, int16_t mo
     }
     return GenerateNewPickup(x, y, z, modelId, pickupType, ammo, moneyPerDay, isEmpty, msg);
 }
-
 extern "C" void OnModLoad()
 {
     pGTASA = aml->GetLib("libGTASA.so");
@@ -85,26 +101,23 @@ extern "C" void OnModLoad()
     // Variables Start //
     SET_TO(ms_fTimeStep, aml->GetSym(hGTASA, "_ZN6CTimer12ms_fTimeStepE"));
     SET_TO(WorldPlayers, aml->GetSym(hGTASA, "_ZN6CWorld7PlayersE"));
-    // Variables End   //
 if(cfg->Bind("FixVertexWeight", true, "Visual")->GetBool())
-    {
-        aml->Write(pGTASA + 0x1C8064, (uintptr_t)"\x01", 1);
-        aml->Write(pGTASA + 0x1C8082, (uintptr_t)"\x01", 1);
-    }
-
-    // Fix walking while rifle-aiming
-    if(cfg->Bind("FixAimingWalkRifle", true, "Gameplay")->GetBool())
-    {
-        HOOKPLT(ControlGunMove, pGTASA + 0x66F9D0);
-    }
-
-    // Fix slow swimming speed
-    if(cfg->Bind("SwimmingSpeedFix", true, "Gameplay")->GetBool())
-    {
-        HOOKPLT(ProcessSwimmingResistance, pGTASA + 0x66E584);
-    }
+{
+    aml->Write(pGTASA + 0x1C8064, (uintptr_t)"\x01", 1);
+    aml->Write(pGTASA + 0x1C8082, (uintptr_t)"\x01", 1);
+}
+// Fix walking while rifle-aiming
+if(cfg->Bind("FixAimingWalkRifle", true, "Gameplay")->GetBool())
+{
+    HOOKPLT(ControlGunMove, pGTASA + 0x66F9D0);
+}
+// Fix slow swimming speed
+if(cfg->Bind("SwimmingSpeedFix", true, "Gameplay")->GetBool())
+{
+    HOOKPLT(ProcessSwimmingResistance, pGTASA + 0x66E584);
+}
 // Buoyancy speed fix (not working)
-    if(cfg->Bind("BuoyancySpeedFix", true, "Gameplay")->GetBool())
-    {
-        HOOKPLT(ProcessBuoyancy, pGTASA + 0x67130C);
-    }
+if(cfg->Bind("BuoyancySpeedFix", true, "Gameplay")->GetBool())
+{
+    HOOKPLT(ProcessBuoyancy, pGTASA + 0x67130C);
+}
