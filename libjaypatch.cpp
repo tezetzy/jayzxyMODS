@@ -9,14 +9,14 @@ NEEDGAME(com.rockstargames.gtasa)
 static uintptr_t pGTASA = 0;
 void* hGTASA;
 /* */
-float* m_f3rdPersonCHairMultX;
-float* m_f3rdPersonCHairMultY;
-float* ms_fTimeStep;
-
 constexpr float fMagic = 50.0f / 30.0f;
 
-/* vars */
-float fAspectCorrection = 0.0f, fAspectCorrectionDiv = 0.0f;
+float* ms_fTimeStep;
+float* ms_fAspectRatio;
+float* ms_fTimeScale;
+float* m_f3rdPersonCHairMultX;
+float* m_f3rdPersonCHairMultY;
+
 constexpr float ar43 = 4.0f / 3.0f;
 #define fAspectCorrection (*ms_fAspectRatio - ar43)
 #define fAspectCorrectionDiv (*ms_fAspectRatio / ar43)
@@ -24,6 +24,7 @@ constexpr float ar43 = 4.0f / 3.0f;
 #define GetTimeStepInSeconds() (GetTimeStep() / 50.0f)
 #define GetTimeStepMagic() (GetTimeStep() / fMagic)
 #define GetTimeStepInvMagic() (fMagic / GetTimeStep())
+float save; // Untuk simpan timestep
 
 /* hoam */
 /* lele */
@@ -74,7 +75,6 @@ DECL_HOOKv(DrawCrosshair)
         *m_f3rdPersonCHairMultX = save1; *m_f3rdPersonCHairMultY = save2;
         return;
     }
-
     float save1 = *m_f3rdPersonCHairMultX; *m_f3rdPersonCHairMultX = 0.530f - fAspectCorrection * 0.01115f; // 0.01125f;
     float save2 = *m_f3rdPersonCHairMultY; *m_f3rdPersonCHairMultY = 0.400f + fAspectCorrection * 0.038f; // 0.03600f;
     DrawCrosshair();
