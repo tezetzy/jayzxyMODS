@@ -1,5 +1,6 @@
 #include <mod/amlmod.h>
-//#include <mod/config.h>
+#include <mod/config.h>
+#include <mod/logger.h>
 
 MYMOD(net.jayzxy.gtasa.abtfixes, GTA:SA ABT Fixes, 1.0, Jayzxy)
 NEEDGAME(com.rockstargames.gtasa)
@@ -7,11 +8,10 @@ NEEDGAME(com.rockstargames.gtasa)
 /* Saves */
 static uintptr_t pGTASA = 0;
 void* hGTASA;
+/* */
 float* m_f3rdPersonCHairMultX;
 float* m_f3rdPersonCHairMultY;
-float* ar43;
 float* ms_fTimeStep;
-float* save;
 
 constexpr float fMagic = 50.0f / 30.0f;
 
@@ -26,9 +26,11 @@ constexpr float ar43 = 4.0f / 3.0f;
 #define GetTimeStepInvMagic() (fMagic / GetTimeStep())
 
 /* hoam */
-CPlayerPed* (*FindPlayerPed)(int playerId);
 /* lele */
 // Struct weapon & player
+struct CWeaponSlot {
+    int m_eWeaponType;
+};
 enum eWeaponType
 {
     WEAPON_UNARMED = 0,
@@ -54,12 +56,13 @@ struct CPlayerInfo
     CPlayerPed* pPed;
 };
 CPlayerInfo* WorldPlayers;
+CPlayerPed* (*FindPlayerPed)(int playerId);
 
 float fWideScreenWidthScale, fWideScreenHeightScale;
 DECL_HOOKv(DrawCrosshair)
 {
-    static constexpr float XSVal = 1024.0f / 1920.0f; // prev. 0.530, now it's 0.533333..3
-    static constexpr float YSVal = 768.0f / 1920.0f; // unchanged :p
+    constexpr float X = 1024.0f / 1920.0f; // prev. 0.530, now it's 0.533333..3
+    constexpr float Y = 768.0f / 1920.0f; // unchanged :p
 
     CPlayerPed* player = WorldPlayers[0].pPed;
     if(player->m_WeaponSlots[player->m_nCurrentWeapon].m_eWeaponType == WEAPON_COUNTRYRIFLE)
