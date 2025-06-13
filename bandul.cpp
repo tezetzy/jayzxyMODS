@@ -1,7 +1,7 @@
 //main
 #include <mod/amlmod.h>
 #include <mod/logger.h>
-//#include <mod/config.h>
+#include <mod/config.h>
 
 MYMODCFG(net.jayzxy.settings, Jtings, 1.0, Jayzxy)
 
