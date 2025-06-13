@@ -29,7 +29,7 @@ jobs:
     - name: Install Android NDK (r25c)...
       uses: nttld/setup-ndk@v1
       with:
-        ndk-version: r24
+        ndk-version: r25c
         local-cache: true
 
     - name: Build the code...
