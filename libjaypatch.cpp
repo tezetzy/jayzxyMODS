@@ -2,38 +2,48 @@
 #include <mod/logger.h>
 #include <mod/config.h>
 #include <dlfcn.h>
+#include <inc/vector.h>
 
 MYMODCFG(net.jayzxy.jaypatch, JPatch, 1.0, Jayzxy)
 uintptr_t pGTASA;
 void* hGTASA;
 float *ms_fTimeStep;
 CPlayerInfo* WorldPlayers;
-struct CVector
+struct CPed
 {
-    float x;
-    float y;
-    float z;
+    void* vtable;
+    uint8_t gap[20];       // Sesuaikan ukuran sesuai offset asli
+    int m_nPedType;
 };
 
-enum RwRenderState
+struct CPhysical
 {
-    rwRENDERSTATENARENDERSTATE = 0,           // Tidak valid
-    rwRENDERSTATEZTESTENABLE = 4,             // Aktifkan depth test
-    rwRENDERSTATEZWRITEENABLE = 7,            // Menulis ke depth buffer
-    rwRENDERSTATEVERTEXALPHAENABLE = 22,      // Enable transparansi berdasarkan alpha
-    rwRENDERSTATEFOGENABLE = 26,              // Aktifkan fog
-    rwRENDERSTATEFOGCOLOR = 27,               // Atur warna fog
-    rwRENDERSTATETEXTURERASTER = 29,          // Atur tekstur yang aktif
-    rwRENDERSTATECULLMODE = 20,               // Cull back/front/none
-    rwRENDERSTATESTENCILENABLE = 52,          // Aktifkan stencil buffer
-    rwRENDERSTATEALPHATESTFUNCTIONREF = 38,   // Alpha test ref value
-    rwRENDERSTATEALPHATESTFUNCTION = 37       // Alpha test function (misalnya GREATER, LESS)
+    void* vtable;
+    uint8_t gap[56];       // Harus disesuaikan dari IDA atau hasil reverse
+    int m_nType;
 };
 
-struct CVector2D
+enum ePedType
 {
-    float x;
-    float y;
+    PED_TYPE_PLAYER1 = 0,
+    PED_TYPE_PLAYER2,
+    // Tambah lainnya jika perlu
+};
+
+enum eEntityType
+{
+    ENTITY_TYPE_NOTHING = 0,
+    ENTITY_TYPE_PED = 3,
+    // ...
+};
+
+using ScriptHandle = int32_t; // Handle pickup, vehicle, dll
+
+enum ePickupType
+{
+    PICKUP_ONCE = 1,
+    PICKUP_MONEY = 2,
+    // dll...
 };
 
 void Redirect(uintptr_t addr, uintptr_t to)
