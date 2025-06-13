@@ -1,9 +1,8 @@
-#include <mod/amlmod.h>
-#include <mod/config.h>
-#include <mod/logger.h>
+#include <template_of_mod/mod/amlmod.h>
+#include <template_of_mod/mod/config.h>
+#include <template_of_mod/mod/logger.h>
 
 MYMOD(net.jayzxy.gtasa.abtfixes, GTA:SA ABT Fixes, 1.0, Jayzxy)
-NEEDGAME(com.rockstargames.gtasa)
 
 /* Saves */
 static uintptr_t pGTASA = 0;
