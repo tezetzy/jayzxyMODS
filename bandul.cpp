@@ -16,7 +16,7 @@ static constexpr float fMagic = 50.0f / 30.0f;
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////     Vars      ///////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-float *ms_fTimeStep, *m_f3rdPersonCHairMultX, *m_f3rdPersonCHairMultY, *ms_fAspectRatio;
+float *ms_fTimeStep, *m_f3rdPersonCHairMultX, *m_f3rdPersonCHairMultY;
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////     Funcs     ///////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
@@ -64,12 +64,9 @@ void HookOf_DrawCrosshair()
 {
     static constexpr float ar43 = 4.0f / 3.0f;
 
-    float save1 = *m_f3rdPersonCHairMultX;
-    *m_f3rdPersonCHairMultX = 0.530f - (*ms_fAspectRatio - ar43) * 0.01125f;
+    float save1 = *m_f3rdPersonCHairMultX; = 0.530f - 0.84f * ar43 * 0.01115f;
 
-    float save2 = *m_f3rdPersonCHairMultY;
-    *m_f3rdPersonCHairMultY = 0.400f + (*ms_fAspectRatio - ar43) * 0.03600f;
-
+    float save2 = *m_f3rdPersonCHairMultY; = 0.530f - 0.84f * ar43 * 0.01115f;
     DrawCrosshair();
 
     *m_f3rdPersonCHairMultX = save1;
@@ -79,7 +76,7 @@ void HookOf_DrawCrosshair()
 extern "C" void OnModLoad()
 {
     cfg->Bind("Author", "", "About")->SetString("JayzxyLGC");
-    cfg->Bind("IdeasFrom", "", "About")->SetString("JuniorDjjr, XMDS");
+    cfg->Bind("IdeasFrom", "", "About")->SetString("JuniorDjjr, XMDS, RusJJ");
     cfg->Bind("Discord", "", "About")->SetString("https://discord.gg/LOGIKA");
     cfg->Save();
 
@@ -87,10 +84,6 @@ extern "C" void OnModLoad()
 
     pGTASA = aml->GetLib("libGTASA.so");
     hGTASA = dlopen("libGTASA.so", RTLD_LAZY);
-
-    SET_TO(m_f3rdPersonCHairMultX,  aml->GetSym(hGTASA, "_ZN7CCamera22m_f3rdPersonCHairMultXE"));
-    SET_TO(m_f3rdPersonCHairMultY,  aml->GetSym(hGTASA, "_ZN7CCamera22m_f3rdPersonCHairMultYE"));
-    SET_TO(ms_fAspectRatio,        aml->GetSym(hGTASA, "_ZN5CDraw15ms_fAspectRatioE"));
 
     //Fix walking while rifle-aiming
     if(cfg->Bind("FixAimingWalkRifle", true, "Gameplay")->GetBool())
