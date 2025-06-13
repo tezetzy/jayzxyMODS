@@ -7,7 +7,6 @@
 MYMODCFG(net.jayzxy.settings, Jtings, 1.0, Jayzxy)
 
 uintptr_t pGTASA;
-void* hGTASA;
 static constexpr float fMagic = 50.0f / 30.0f;
 
 float *ms_fTimeStep;
@@ -90,7 +89,6 @@ extern "C" void OnModLoad()
     logger->SetTag("JayzSettings");
 
     pGTASA = aml->GetLib("libGTASA.so");
-    hGTASA = dlopen("libGTASA.so", RTLD_LAZY);
 
     //Fix walking while rifle-aiming
     if(cfg->Bind("FixAimingWalkRifle", true, "Gameplay")->GetBool())
