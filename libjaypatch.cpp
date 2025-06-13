@@ -11,7 +11,6 @@ void* hGTASA;
 
 float* ms_fTimeStep;
 static constexpr float fMagic = 50.0f / 30.0f;
-re
 
 DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D)
 {
