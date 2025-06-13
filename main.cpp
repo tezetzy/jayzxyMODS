@@ -59,14 +59,14 @@ DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D) // AimingRifleWalkFix
     ControlGunMove(self, vec2D);
     *ms_fTimeStep = save;
 }
-static constexpr float ar43 = 4.0f/3.0f;
-DECL_HOOKv(DrawCrosshair)
-{
+    static constexpr float ar43 = 4.0f/3.0f;
+    DECL_HOOKv(DrawCrosshair)
+    {
     float save1 = *m_f3rdPersonCHairMultX; *m_f3rdPersonCHairMultX = 0.530f - (*ms_fAspectRatio - ar43) * 0.01125f;
     float save2 = *m_f3rdPersonCHairMultY; *m_f3rdPersonCHairMultY = 0.400f + (*ms_fAspectRatio - ar43) * 0.03600f;
     DrawCrosshair();
     *m_f3rdPersonCHairMultX = save1; *m_f3rdPersonCHairMultY = save2;
-}
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -90,11 +90,11 @@ extern "C" void OnModLoad()
     //Fix walking while rifle-aiming
     if(cfg->Bind("FixAimingWalkRifle", true, "Gameplay")->GetBool())
     {
-        HOOKPLT(ControlGunMove, pGTASA + 0x66F9D0);
+        HOOKPLT(HookOf_ControlGunMove, pGTASA + 0x66F9D0);
     }
     //fixing a crosshair position by very stupid math
     if(cfg->Bind("FixCrosshair", true, "Visual")->GetBool())
     {
-        HOOKPLT(DrawCrosshair, pGTASA + 0x672880);
+        HOOKPLT(HookOf_DrawCrosshair, pGTASA + 0x672880);
     }
 }
