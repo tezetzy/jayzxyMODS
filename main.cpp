@@ -1,6 +1,6 @@
-#include <mod/amlmod.h>
-#include <mod/logger.h>
-#include <mod/config.h>
+#include <template_of_mod/mod/amlmod.h>
+#include <template_of_mod/mod/logger.h>
+#include <template_of_mod/mod/config.h>
 #include <dlfcn.h>
 
 MYMODCFG(net.jayzxy.settings, Jtings, 1.0, Jayzxy)
