@@ -1,4 +1,4 @@
-include <mod/amlmod.h>
+#include <mod/amlmod.h>
 
 MYMOD(net.jayzxy.gtasa.mirafix, GTA:SA Crosshair Fix, 1.0, Jayzxy)
 NEEDGAME(ro.alyn_sampmobile.game)
