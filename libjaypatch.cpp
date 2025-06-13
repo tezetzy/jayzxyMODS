@@ -44,13 +44,10 @@ void (*_rwOpenGLSetRenderState)(RwRenderState, int);
 void (*_rwOpenGLGetRenderState)(RwRenderState, void*);
 void (*ClearPedWeapons)(CPed*);
 
-float f = 0.5f;
-asm volatile("VMOV.F32 S0, %0" :: "r"(f));
-
 DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D)
 {
     float save = *ms_fTimeStep;
-    *ms_fTimeStep = fMagic;
+    *ms_fTimeStep = 50.0f;
     ControlGunMove(self, vec2D);
     *ms_fTimeStep = save;
 }
