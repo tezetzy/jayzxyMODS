@@ -62,11 +62,8 @@ void HookOf_ControlGunMove(void* self, CVector2D* vec2D)
 
 void HookOf_DrawCrosshair()
 {
-    static constexpr float ar43 = 4.0f / 3.0f;
-
-    float save1 = *m_f3rdPersonCHairMultX; = 0.530f - 0.84f * ar43 * 0.01115f;
-
-    float save2 = *m_f3rdPersonCHairMultY; = 0.530f - 0.84f * ar43 * 0.01115f;
+    float save1 = *m_f3rdPersonCHairMultX; *m_f3rdPersonCHairMultX = 0.530f;
+    float save2 = *m_f3rdPersonCHairMultY; *m_f3rdPersonCHairMultY = 0.530f;
     DrawCrosshair();
 
     *m_f3rdPersonCHairMultX = save1;
@@ -94,6 +91,9 @@ extern "C" void OnModLoad()
     //Fix crosshair position
     if(cfg->Bind("FixCrosshair", true, "Visual")->GetBool())
     {
+        aml->Unprot(pGTASA + 0x952CB0, 8);
+        SET_TO(m_f3rdPersonCHairMultX, pGTASA + 0x952CB0);
+        SET_TO(m_f3rdPersonCHairMultY, pGTASA + 0x952CB4);
         HOOKPLT(DrawCrosshair, pGTASA + 0x672880);
     }
 }
