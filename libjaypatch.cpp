@@ -44,11 +44,6 @@ void (*_rwOpenGLSetRenderState)(RwRenderState, int);
 void (*_rwOpenGLGetRenderState)(RwRenderState, void*);
 void (*ClearPedWeapons)(CPed*);
 
-extern "C" void logika(void)
-{
-    asm("VMOV.F32 S0, #0.5");
-}
-
 DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D)
 {
     float save = *ms_fTimeStep;
