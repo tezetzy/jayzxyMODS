@@ -51,7 +51,8 @@ void Redirect(uintptr_t addr, uintptr_t to)
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////     Hooks     ///////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-extern "C" void adadad(void) {
+extern "C" void adadad(void)
+{
 DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D) // AimingRifleWalkFix
 {
     float save = *ms_fTimeStep; *ms_fTimeStep = fMagic;
@@ -65,6 +66,7 @@ DECL_HOOKv(DrawCrosshair)
     float save2 = *m_f3rdPersonCHairMultY; *m_f3rdPersonCHairMultY = 0.400f + (*ms_fAspectRatio - ar43) * 0.03600f;
     DrawCrosshair();
     *m_f3rdPersonCHairMultX = save1; *m_f3rdPersonCHairMultY = save2;
+}
 }
 
 /////////////////////////////////////////////////////////////////////////////
