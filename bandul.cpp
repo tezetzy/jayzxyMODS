@@ -66,7 +66,7 @@ extern "C" void OnModLoad()
     //Fix walking while rifle-aiming
     if(cfg->Bind("FixAimingWalkRifle", true, "Gameplay")->GetBool())
     {
-        HOOKPLT(HookOf_ControlGunMove, pGTASA + 0x66F9D0);
+        HOOKPLT(ControlGunMove, pGTASA + 0x66F9D0);
     }
 
     //Fix crosshair position
