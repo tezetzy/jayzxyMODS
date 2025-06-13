@@ -3,8 +3,8 @@
 #include <mod/config.h>
 #include <dlfcn.h>
 
-#include "inc/vec2d.h"
-#include "inc/cvector2d.h"
+//#include "inc/vec2d.h"
+//#include "inc/cvector2d.h"
 
 
 MYMODCFG(net.fixjiggle.jayz, JayMOD, 1.0, jayzxy)
@@ -15,6 +15,9 @@ MYMODCFG(net.fixjiggle.jayz, JayMOD, 1.0, jayzxy)
 static uintptr_t pGTASA = 0;
 float *m_f3rdPersonCHairMultX, *m_f3rdPersonCHairMultY;
 
+struct CVector2D {
+    float x, y;
+};
 /////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////     Vars      ///////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
