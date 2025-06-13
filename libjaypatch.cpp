@@ -4,7 +4,7 @@
 #include <dlfcn.h>
 
 // Ambil definisi dari header buatan/mod (gunakan struktur yang kamu miliki atau saya bisa bantu buatkan)
-#include "private.h" // Kamu perlu buat header ini nanti
+#include "inc/private.h" // Kamu perlu buat header ini nanti
 
 MYMODCFG(net.jayzxy, jaypatch, JPatch, 1.0, Jayzxy)
 
