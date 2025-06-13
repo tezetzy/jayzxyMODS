@@ -4,8 +4,8 @@
 #include "vec2d.h"
 #include <cmath>
 
-struct cvector2d : public vec2d {
-    cvector2d(double x = 0.0, double y = 0.0) : vec2d(x, y) {}
+struct CVector2D : public Vec2D {
+    CVector2D(double x = 0.0, double y = 0.0) : Vec2D(x, y) {}
 
     double angle() const { return std::atan2(y, x); }
 
