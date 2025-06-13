@@ -1,4 +1,4 @@
-#include <inc/amlmod.h>
+#include <amlmod.h>
 #include <dlfcn.h>
 // Ambil definisi dari header buatan/mod (gunakan struktur yang kamu miliki atau saya bisa bantu buatkan)
 #include "inc/private.h" // Kamu perlu buat header ini nanti
@@ -10,7 +10,7 @@ void* hGTASA;
 
 float* ms_fTimeStep;
 static constexpr float fMagic = 50.0f / 30.0f;
-
+re
 
 DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D)
 {
