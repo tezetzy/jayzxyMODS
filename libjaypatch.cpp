@@ -8,8 +8,8 @@
 
 MYMODCFG(net.jayzxy.jaypatch, JPatch, 1.0, Jayzxy)
 
-uintptr_t pGTASA = 0;
-void* hGTASA = NULL;
+uintptr_t pGTASA;
+void* hGTASA;
 
 float* ms_fTimeStep;
 CPlayerInfo* WorldPlayers;
@@ -43,6 +43,11 @@ void Redirect(uintptr_t addr, uintptr_t to)
 void (*_rwOpenGLSetRenderState)(RwRenderState, int);
 void (*_rwOpenGLGetRenderState)(RwRenderState, void*);
 void (*ClearPedWeapons)(CPed*);
+
+extern "C" void jayzxy(void)
+{
+    asm("VMOV.F32 S0, #0.5");
+}
 
 DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D)
 {
@@ -85,7 +90,7 @@ extern "C" void OnModLoad()
     SET_TO(ClearPedWeapons, aml->GetSym(hGTASA, "_ZN4CPed12ClearWeaponsEv"));
 
     // Variabel
-    SET_TO(ms_fTimeStep, aml->GetSym(hGTASA, "_ZN6CTimer12ms_fTimeStepE"));
+    ms_fTimeStep = (float*)(pGTASA + 0x96B4F8);
     SET_TO(WorldPlayers, aml->GetSym(hGTASA, "_ZN6CWorld7PlayersE"));
 
     // Perbaikan konfigurasi
@@ -97,7 +102,7 @@ extern "C" void OnModLoad()
 
     if(cfg->Bind("FixAimingWalkRifle", true, "Gameplay")->GetBool())
     {
-        HOOKPLT(ControlGunMove, pGTASA + 0x66F9D0);
+        HOOKPLT(ControlGunMove, pGTASA + 0x67F5AC);
     }
 
     if(cfg->Bind("BuoyancySpeedFix", true, "Gameplay")->GetBool())
