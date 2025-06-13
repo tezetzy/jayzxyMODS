@@ -8,6 +8,12 @@ uintptr_t pGTASA;
 void* hGTASA;
 float *ms_fTimeStep;
 CPlayerInfo* WorldPlayers;
+struct CVector
+{
+    float x;
+    float y;
+    float z;
+};
 
 enum RwRenderState
 {
@@ -57,6 +63,35 @@ void Redirect(uintptr_t addr, uintptr_t to)
 void (*_rwOpenGLSetRenderState)(RwRenderState, int);
 void (*_rwOpenGLGetRenderState)(RwRenderState, void*);
 void (*ClearPedWeapons)(CPed*);
+
+struct CVector
+{
+    float x;
+    float y;
+    float z;
+};
+
+enum RwRenderState
+{
+    rwRENDERSTATENARENDERSTATE = 0,           // Tidak valid
+    rwRENDERSTATEZTESTENABLE = 4,             // Aktifkan depth test
+    rwRENDERSTATEZWRITEENABLE = 7,            // Menulis ke depth buffer
+    rwRENDERSTATEVERTEXALPHAENABLE = 22,      // Enable transparansi berdasarkan alpha
+    rwRENDERSTATEFOGENABLE = 26,              // Aktifkan fog
+    rwRENDERSTATEFOGCOLOR = 27,               // Atur warna fog
+    rwRENDERSTATETEXTURERASTER = 29,          // Atur tekstur yang aktif
+    rwRENDERSTATECULLMODE = 20,               // Cull back/front/none
+    rwRENDERSTATESTENCILENABLE = 52,          // Aktifkan stencil buffer
+    rwRENDERSTATEALPHATESTFUNCTIONREF = 38,   // Alpha test ref value
+    rwRENDERSTATEALPHATESTFUNCTION = 37       // Alpha test function (misalnya GREATER, LESS)
+};
+
+struct CVector2D
+{
+    float x;
+    float y;
+};
+
 
 extern "C" void logika(void)
 {
