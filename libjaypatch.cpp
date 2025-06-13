@@ -9,7 +9,6 @@ static uintptr_t pGTASA = 0;
 void* hGTASA;
 float* m_f3rdPersonCHairMultX;
 float* m_f3rdPersonCHairMultY;
-float* fAspectCorrection;  // biasanya aspek rasio (w/h)
 float* ar43;
 float* ms_fTimeStep;
 float* save;
@@ -97,8 +96,8 @@ extern "C" void OnModLoad()
     SET_TO(m_f3rdPersonCHairMultY,  aml->GetSym(hGTASA, "_ZN7CCamera22m_f3rdPersonCHairMultYE"));
     SET_TO(ms_fAspectRatio,         aml->GetSym(hGTASA, "_ZN5CDraw15ms_fAspectRatioE"));
     SET_TO(ms_fTimeScale,           aml->GetSym(hGTASA, "_ZN6CTimer13ms_fTimeScaleE"));
-    SET_TO(WorldPlayers,            *(void**)(pGTASA + BYBIT(0x6783C8, 0x84E7A8)));
-    
+    //SET_TO(WorldPlayers,            aml->GetSym(pGTASA + BYBIT(0x6783C8, 0x84E7A8)));
+    WorldPlayers = (CPlayerInfo*)(pGTASA + 0x84E7A8);
     
     HOOKPLT(DrawCrosshair, pGTASA + 0x51C694);
     HOOKPLT(ControlGunMove, pGTASA + 0x83F9D8);
