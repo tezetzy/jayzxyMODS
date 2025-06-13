@@ -48,8 +48,10 @@ void Redirect(uintptr_t addr, uintptr_t to)
         aml->Write(addr, (uintptr_t)hook, sizeof(hook));
     }
 }
+//declarasi
+DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D);
+DECL_HOOKv(DrawCrosshair);
 // Hook untuk ControlGunMove (rifle aiming walk fix)
-DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D)
 void HookOf_ControlGunMove(void* self, CVector2D* vec2D)
 {
     float save = *ms_fTimeStep;
@@ -58,8 +60,6 @@ void HookOf_ControlGunMove(void* self, CVector2D* vec2D)
     *ms_fTimeStep = save;
 }
 
-// Hook untuk DrawCrosshair (fix posisi crosshair)
-DECL_HOOKv(DrawCrosshair)
 void HookOf_DrawCrosshair()
 {
     static constexpr float ar43 = 4.0f / 3.0f;
@@ -75,10 +75,7 @@ void HookOf_DrawCrosshair()
     *m_f3rdPersonCHairMultX = save1;
     *m_f3rdPersonCHairMultY = save2;
 }
-
-/////////////////////////////////////////////////////////////////////////////
-///////////////////////////////     Funcs     ///////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////
 extern "C" void OnModLoad()
 {
     cfg->Bind("Author", "", "About")->SetString("JayzxyLGC");
