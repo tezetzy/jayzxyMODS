@@ -44,10 +44,8 @@ void (*_rwOpenGLSetRenderState)(RwRenderState, int);
 void (*_rwOpenGLGetRenderState)(RwRenderState, void*);
 void (*ClearPedWeapons)(CPed*);
 
-extern "C" void jayzxy(void)
-{
-    asm("VMOV.F32 S0, #0.5");
-}
+float f = 0.5f;
+asm volatile("VMOV.F32 S0, %0" :: "r"(f));
 
 DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D)
 {
