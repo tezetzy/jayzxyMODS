@@ -1,5 +1,6 @@
 #include <mod/amlmod.h>
 //#include <mod/config.h>
+#include <struc/crosshair.h>
 
 MYMOD(net.jayzxy.gtasa.abtfixes, GTA:SA ABT Fixes, 1.0, Jayzxy)
 NEEDGAME(com.rockstargames.gtasa)
@@ -39,6 +40,5 @@ extern "C" void OnModLoad()
     SET_TO(m_f3rdPersonCHairMultX, pGTASA + 0x952CB0);
     SET_TO(m_f3rdPersonCHairMultY, pGTASA + 0x952CB4);
     HOOKPLT(DrawCrosshair, pGTASA + 0x51C694);
-    SET_TO(ms_fTimeStep, aml->GetSym(hGTASA, "_ZN6CTimer12ms_fTimeStepE"));
     HOOKPLT(ControlGunMove, pGTASA + 0x83F9D8);
 }
