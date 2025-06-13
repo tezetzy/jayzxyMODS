@@ -3,7 +3,7 @@
 #include <mod/config.h>
 #include <dlfcn.h>
 
-MYMODCFG(net.jayzxy,jaypatch, JPatch, 1.0, Jayzxy)
+MYMODCFG(net.jayzxy.jaypatch, JPatch, 1.0, Jayzxy)
 uintptr_t pGTASA;
 void* hGTASA;
 float *ms_fTimeStep;
