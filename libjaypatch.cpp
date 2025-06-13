@@ -8,6 +8,11 @@ uintptr_t pGTASA;
 void* hGTASA;
 float *ms_fTimeStep;
 CPlayerInfo* WorldPlayers;
+struct CVector2D
+{
+    float x;
+    float y;
+};
 void Redirect(uintptr_t addr, uintptr_t to)
 {
     if(!addr) return;
