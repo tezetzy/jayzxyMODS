@@ -15,6 +15,7 @@ float *ms_fTimeStep, *m_f3rdPersonCHairMultX, *m_f3rdPersonCHairMultY;
 struct CVector2D {
     float x, y;
 };
+float* ms_fAspectRatio = nullptr
 
 void Redirect(uintptr_t addr, uintptr_t to)
 {
@@ -42,7 +43,6 @@ void Redirect(uintptr_t addr, uintptr_t to)
 }
 //declarasi
 DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D);
-DECL_HOOKv(DrawCrosshair);
 // Hook untuk ControlGunMove (rifle aiming walk fix)
 void HookOf_ControlGunMove(void* self, CVector2D* vec2D)
 {
@@ -52,6 +52,10 @@ void HookOf_ControlGunMove(void* self, CVector2D* vec2D)
     *ms_fTimeStep = save;
 }
 
+DECL_HOOKv(DrawCrosshair);
+//
+static constexpr float XSVal = 1024.0f / 1920.0f; // prev. 0.530, now it's 0.533333..3
+static constexpr float YSVal = 768.0f / 1920.0f; // unchanged :p
 void HookOf_DrawCrosshair()
 {
     float save1 = *m_f3rdPersonCHairMultX; *m_f3rdPersonCHairMultX = 0.530f;
