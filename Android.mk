@@ -13,4 +13,5 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/patches
 ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
 	LOCAL_CFLAGS += -mfpu=neon
 endif
+LOCAL_LDLIBS += -llog
 include $(BUILD_SHARED_LIBRARY)
