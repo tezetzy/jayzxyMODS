@@ -1,4 +1,4 @@
-#include <amlmod.h>
+#include <mod/amlmod.h>
 #include <dlfcn.h>
 // Ambil definisi dari header buatan/mod (gunakan struktur yang kamu miliki atau saya bisa bantu buatkan)
 #include "inc/private.h" // Kamu perlu buat header ini nanti
