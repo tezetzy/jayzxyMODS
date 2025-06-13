@@ -6,10 +6,11 @@
 // Ambil definisi dari header buatan/mod (gunakan struktur yang kamu miliki atau saya bisa bantu buatkan)
 #include "inc/private.h" // Kamu perlu buat header ini nanti
 
-MYMODCFG(net.jayzxy, jaypatch, JPatch, 1.0, Jayzxy)
+MYMODCFG(net.jayzxy.jaypatch, JPatch, 1.0, Jayzxy)
 
-uintptr_t pGTASA;
-void* hGTASA;
+uintptr_t pGTASA = 0;
+void* hGTASA = NULL;
+
 float* ms_fTimeStep;
 CPlayerInfo* WorldPlayers;
 static constexpr float fMagic = 50.0f / 30.0f;
@@ -102,11 +103,6 @@ extern "C" void OnModLoad()
     if(cfg->Bind("FixAimingWalkRifle", true, "Gameplay")->GetBool())
     {
         HOOKPLT(ControlGunMove, pGTASA + 0x66F9D0);
-    }
-
-    if(cfg->Bind("SwimmingSpeedFix", true, "Gameplay")->GetBool())
-    {
-        HOOKPLT(ProcessSwimmingResistance, pGTASA + 0x66E584);
     }
 
     if(cfg->Bind("BuoyancySpeedFix", true, "Gameplay")->GetBool())
