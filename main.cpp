@@ -52,9 +52,6 @@ void Redirect(uintptr_t addr, uintptr_t to)
 ///////////////////////////////     Hooks     ///////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 extern "C" void adadad(void)
-{
-    asm("VMOV.F32 S0, #0.5");
-}
 DECL_HOOKv(ControlGunMove, void* self, CVector2D* vec2D) // AimingRifleWalkFix
 {
     float save = *ms_fTimeStep; *ms_fTimeStep = fMagic;
