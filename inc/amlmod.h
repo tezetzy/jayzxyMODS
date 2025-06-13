@@ -168,6 +168,6 @@ typedef ModInfo* (*GetModInfoFn)();
 
 
 
-#include "iaml.h"
+#include "mod/iaml.h"
 
 #endif // _AMLMOD
