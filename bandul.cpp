@@ -1,9 +1,8 @@
-//main
 #include <mod/amlmod.h>
 #include <mod/logger.h>
-#include <mod/config.h>
+#include <mod/config.cpp>
 
-MYMODCFG(net.jayzxy.settings, Jtings, 1.0, Jayzxy)
+MYMODCFG(net.jayzMODS.settings, Jtings, 1.0, Jayzxy)
 
 uintptr_t pGTASA;
 static constexpr float fMagic = 50.0f / 30.0f;
